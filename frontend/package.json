@@ -2,19 +2,18 @@
   "name": "ragemp-rp-frontend",
   "version": "0.0.8",
   "description": "Frontend part of RAGEMP RP Gamemode",
-  "homepage": ".",
   "scripts": {
     "start": "vite",
     "build:watch": "tsc && vite build --watch",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "author": "rShr0x",
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@vitejs/plugin-react": "^4.3.0",
     "classnames": "^2.5.1",
+    "lucide-react": "^0.474.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-toastify": "^9.1.3",

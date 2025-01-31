@@ -1,7 +1,6 @@
 @import "../../../styles/vars";
 
 .mainhud {
-
     position: absolute;
     display: flex;
     align-items: center;
@@ -9,25 +8,46 @@
     z-index: -1;
     height: 100%;
     width: 100%;
-    filter: drop-shadow(0 0 0.46296296296296297vh black);
 
     .left {
         width: 59.25925925925926vh;
         height: 100%;
 
+        .money {
+            position: absolute;
+            left: 28.5vh;
+            bottom: 1.5vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+
+            .info {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                background-color: transparent;
+
+                .cash {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    padding: .2vh;
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+            }
+        }
 
         .areainfo {
             position: absolute;
-            left: 28vh;
+            left: 24.5vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: $global-bg-transparent-reverted;
+            background-color: transparent;
             width: 20vh;
             height: 5vh;
-            border-top-right-radius: 1vh;
-            border-bottom-right-radius: 1vh;
-            bottom: 1.5vh;
+            bottom: 6.5vh;
 
             img {
                 width: 2.314814814814815vh;
@@ -37,16 +57,18 @@
             .areadata {
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                align-items: start;
 
                 .areaname {
-                    font-family: $global-font;
-                    text-shadow: 0 0 0.9259259259259259vh black;
+                    font-size: 24px;
+                    font-weight: 500;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 }
 
                 .streetname {
-                    font-family: Arial, Helvetica, sans-serif;
-                    text-shadow: 0 0 0.9259259259259259vh black;
+                    font-size: 20px;
+                    font-weight: 400;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 }
             }
         }
@@ -61,48 +83,23 @@
         width: 59.25925925925926vh;
         height: 100%;
 
-
-        .cashinfo {
-            position: absolute;
-            right: 1vh;
-            top: 25vh;
-            font-size:2.5vh;
-            font-family: 'Beast Duh', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 1vh;
-            justify-content: center;
-            border-radius: .5vh;
-            text-shadow: .1vh .1vh 2vh black;
-            background: $global-bg-transparent;
-
-            .cash {
-                font-family: 'Beast Duh', sans-serif;
-                padding: .2vh;
-            }
-
-            img {
-                width: 2.314814814814815vh;
-                height: 2.314814814814815vh;
-                margin-left: 1vh;
-            }
-        }
-
         .servername {
             position: absolute;
-            right: 0vh;
+            right: 1vh;
             top: 1vh;
             width: 20vh;
             font-size: 3vh;
             font-family: 'Beast Duh';
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: end;
+            justify-content: right;
             background-color: transparent;
-            border-radius: .5vh;
-            text-shadow: .1vh .1vh 2vh black;
-            background: $global-bg-transparent;
+
+            .logo {
+                // TODO: Написать стили для лого, transparent после удалить
+                background-color: transparent;
+            }
 
             .playerInfo {
                 display: flex;
@@ -112,18 +109,15 @@
 
                 &::before {
                     content: "";
-
                     position: absolute;
                     width: 90%;
                     height: 1%;
                     background: $global-bg;
                     right: 1vh;
                     top: 3.7vh;
-
                 }
 
                 .id,
-                .ping,
                 .online {
                     display: flex;
                     align-items: center;
@@ -138,16 +132,8 @@
                         height: 2.314814814814815vh;
                     }
                 }
-
-                .ping {}
-
-                .online {}
-
-
-
             }
         }
-
 
         .stars {
             position: absolute;
@@ -187,7 +173,6 @@
                 transform: rotateY(180deg);
 
             }
-
 
             .ammodata {
                 position: relative;

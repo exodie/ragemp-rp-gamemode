@@ -2,6 +2,7 @@ interface IColors {
     hair: Array<{ color: string }>;
     eyes: Array<{ id: number; color: string }>;
 }
+
 const colors: IColors = {
     hair: [
         { color: "#0E0E0F" },

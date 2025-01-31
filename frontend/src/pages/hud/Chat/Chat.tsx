@@ -10,9 +10,14 @@ import style from "./chat.module.scss";
 let chatHideTimeout: NodeJS.Timeout | null = null;
 let chatFadeInterval: NodeJS.Timeout | null = null;
 
-const Chat: FC<{ store: typeof chatStore; isVisible: boolean }> = ({ store, isVisible }) => {
+type Props = {
+    store: typeof chatStore;
+    isVisible: boolean;
+}
+
+const Chat: FC<Props> = ({ store, isVisible }) => {
     const [chatOpacity, setChatOpacity] = useState(1.0);
-    const [chatVisibility, setchatVisibility] = useState(10000);
+    const [chatVisibility, _] = useState(10000);
     const chat = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -77,7 +82,7 @@ const Chat: FC<{ store: typeof chatStore; isVisible: boolean }> = ({ store, isVi
     if (!store.isActive) return null;
 
     return (
-        <div className={style.main} style={{ visibility: isVisible ? "visible" : "hidden" }}>
+        <div className={style.main} style={{ visibility: isVisible ? "visible" : "hidden", backgroundColor: store.settings.background ? "#1414166a" : "transparent" }}>
             <div ref={chat} className={style.content} style={{ opacity: chatOpacity, backgroundColor: store.settings.background ? "#000000aa" : "transparent" }}>
                 {store.messages.map((el, key) => (
                     <div className={style.text} key={key}>
