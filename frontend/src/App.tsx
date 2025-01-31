@@ -29,7 +29,7 @@ const AppContent: FC = () => {
     }, []);
 
     return (
-        <div className="app">
+        <div className="app" style={{ backgroundColor: "gray" }}>
             <Suspense fallback={<div>Loading...</div>}>
                 <Chat store={chatStore} isVisible={page === "hud"} />
                 <ToastContainer

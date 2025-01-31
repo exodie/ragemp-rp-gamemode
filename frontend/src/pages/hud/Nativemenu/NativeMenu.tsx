@@ -1,12 +1,12 @@
-import { FC, useEffect, useRef } from "react";
-
+import { type FC } from "react";
 import { observer } from "mobx-react-lite";
-import Container from "./components/Container";
 
-import style from "./nativemenu.module.scss";
+import Container from "./components/Container";
 import { nativemenuStore } from "store/Nativemenu.store";
 
-const NativeMenu: FC<{ store: typeof nativemenuStore }> = ({ store }) => {
+import style from "./nativemenu.module.scss";
+
+export const NativeMenu: FC<{ store: typeof nativemenuStore }> = observer(({ store }) => {
     if (!store.menu.isActive) return null;
 
     return (
@@ -20,6 +20,4 @@ const NativeMenu: FC<{ store: typeof nativemenuStore }> = ({ store }) => {
             </div>
         </div>
     );
-};
-
-export default observer(NativeMenu);
+});

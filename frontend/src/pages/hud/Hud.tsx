@@ -6,7 +6,7 @@ import InteractionMenu from "./InteractionMenu/InteractionMenu";
 import MainHud from "./MainHud/MainHud";
 import Inventory from "./Inventory/Inventory";
 import DeathScreen from "./DeathScreen/DeathScreen";
-import NativeMenu from "./Nativemenu/NativeMenu";
+import { NativeMenu } from "./Nativemenu/NativeMenu";
 import InteractButton from "./InteractButton/InteractButton";
 /* Stores */
 import { inventoryStore } from "store/Inventory.store";

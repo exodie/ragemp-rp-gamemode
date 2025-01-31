@@ -6,89 +6,77 @@ import { hudStore } from "store/Hud.store";
 import { playerStore } from "store/Player.store";
 
 import Speedometer from "./components/Speedometer";
+import { StreetOutput } from "./components/street";
+import { MoneyOutput } from "./components/money";
 
 import star from "assets/images/hud/icons/star.svg";
-import ping from "assets/images/hud/icons/ping.svg";
-import users from "assets/images/hud/icons/user.svg";
 import ammoicon from "assets/images/hud/icons/ammo.svg";
-import areaicon from "assets/images/hud/icons/areaname.svg";
-import cashicon from "assets/images/hud/icons/cash.svg";
 
-import style from "./mainhud.module.scss";
-import { regExp } from "utils/Helpers.util";
+import styles from "./mainhud.module.scss";
 
-const MainHUD: FC<{ store: typeof hudStore; playerStore: typeof playerStore }> = ({ store, playerStore }) => {
+type Props = {
+    store: typeof hudStore;
+    playerStore: typeof playerStore;
+};
+
+const MainHUD: FC<Props> = ({ store, playerStore }) => {
+    const { areaData, vehicleData } = store;
+    const { data, keybindGuide, nowPlaying } = playerStore;
+
     const getWeaponImage = useMemo(() => {
-        return new URL(`../../../assets/images/hud/weapons/${playerStore.data.weapondata?.weapon}.svg`, import.meta.url).href;
-    }, [playerStore.data.weapondata]);
+        return new URL(`../../../assets/images/hud/weapons/${data.weapondata?.weapon}.svg`, import.meta.url).href;
+    }, [data.weapondata]);
 
     return (
-        <div className={style.mainhud}>
-            <div className={style.left}>
-                <div className={style.areainfo}>
-                    <img src={areaicon} alt="" />
+        <div className={styles.mainhud}>
+            <div className={styles.left}>
+                <MoneyOutput cash={data.cash} wallet={100000} />
 
-                    <div className={style.areadata}>
-                        <div className={style.areaname}>{store.areaData.area}</div>
-                        <div className={style.streetname}>{store.areaData.street}</div>
-                    </div>
-                </div>
+                <StreetOutput area={areaData.area} street={areaData.street} />
             </div>
-            <div className={style.center}></div>
-            <div className={style.right}>
-                <div className={style.servername}>
-                    <span style={{ color: "red" }}>RAGEMP ROLEPLAY</span>
 
-                    <div className={style.playerInfo}>
-                        <div className={style.id}>ID: {playerStore.data.id}</div>
+            <div className={styles.center}></div>
 
-                        <div className={style.ping}>
-                            <img src={ping} alt="" />
-                            {playerStore.data.ping}
-                        </div>
-                        <div className={style.online}>
-                            <img src={users} alt="" />
-                            {playerStore.nowPlaying}
-                        </div>
+            <div className={styles.right}>
+                <div className={styles.servername}>
+                    {/* TODO-MResearch: Gecko Freeroam? Подумать над самим лого, и в каком исполнении оно должно быть */}
+                    <span className={styles.logo}>Gecko FRM</span>
+
+                    <div className={styles.playerInfo}>
+                        <span className={styles.id}>#{data.id}</span>
+                        <span className={styles.online}>{nowPlaying} / 1000</span>
                     </div>
                 </div>
 
-                {playerStore.data.wantedLevel > 0 && (
-                    <div className={style.stars}>
-                        {Array.from({ length: playerStore.data.wantedLevel }).map((_e, x) => {
-                            return <img src={star} alt="star" key={x} />;
-                        })}
+                {data.wantedLevel > 0 && (
+                    <div className={styles.stars}>
+                        {Array.from({ length: data.wantedLevel }).map((_e, x) => (
+                            <img src={star} alt="star" key={x} />
+                        ))}
                     </div>
                 )}
 
-                {playerStore.data.weapondata && (
-                    <div className={style.weaponInfo}>
+                {data.weapondata && (
+                    <div className={styles.weaponInfo}>
                         <img src={getWeaponImage} alt="" />
-                        <span className={style.ammodata}>
+                        <span className={styles.ammodata}>
                             <img src={ammoicon} alt="ammo" />
-                            {playerStore.data.weapondata.ammo}/{playerStore.data.weapondata.maxammo}
+                            {data.weapondata.ammo}/{data.weapondata.maxammo}
                         </span>
                     </div>
                 )}
 
-                <div className={style.cashinfo}>
-                    <img src={cashicon} alt="" />
-                    <div className={style.cash}>${("" + playerStore.data.cash).replace(regExp.money, "$1,")}</div>
+                <div className={styles.keybindGuide}>
+                    {entries(keybindGuide).map(([key, label], e) => (
+                        <div key={e} className={styles.keybind}>
+                            <span className={styles.key}>{key}</span>
+                            {label}
+                        </div>
+                    ))}
                 </div>
 
-                <div className={style.keybindGuide}>
-                    {entries(playerStore.keybindGuide).map(([x, val], e) => {
-                        return (
-                            <div key={e} className={style.keybind}>
-                                <span className={style.key}>{x}</span>
-                                {val}
-                            </div>
-                        );
-                    })}
-                </div>
-
-                {store.vehicleData.isActive && (
-                    <div className={style.speedo}>
+                {vehicleData.isActive && (
+                    <div className={styles.speedo}>
                         <Speedometer store={store} />
                     </div>
                 )}

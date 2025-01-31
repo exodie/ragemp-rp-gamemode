@@ -30,10 +30,10 @@ const InteractionMenu: FC<{ store: typeof hudStore }> = ({ store }) => {
                     .map((e, idx) => {
                         return (
                             <SubMenu key={idx} itemView={e.text} data={e.id} displayPosition="center">
-                                {e.subItems?.map((subitem, index) => {
+                                {e.subItems?.map((_, index) => {
                                     return (
-                                        <MenuItem onItemClick={handleItemClick} data={e.id}>
-                                            {e.text}
+                                        <MenuItem key={index} onItemClick={handleItemClick} data={e.id}>
+                                           {e.text}
                                         </MenuItem>
                                     );
                                 })}
